@@ -1,0 +1,27 @@
+let int     n1_2;
+let boolean _l1;
+let string  cad;
+let int     n2;
+let boolean l2;
+input (n1111111111);
+l1 += l2;
+if (! l2) cad = 'he'llo';
+n2 -= n1 + 378;
+
+print(	33 
+		+ 
+		n1 
+		- 
+		n2);
+
+function ff boolean(boolean ss)
+{
+	varglobal = 8;
+	if (l1) l2 = ff (ss);
+	return ss;
+}
+		
+		
+		
+if (ff(l2)) 
+    print (varglobal);
