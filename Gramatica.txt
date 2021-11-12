@@ -1,0 +1,58 @@
+Terminales = { let id ; if int string boolean ( ) { } else print input return - = -= , function && < > + entero cadena lambda }
+NoTerminales = { P B T G C O S W Z M X L Q F H A K E E_ R R_ U U_ V D }
+//// Se ha utilizado _ para denotar la ' (prima)
+Axioma = P
+Producciones = {
+P -> B P 
+P -> F P
+P -> lambda
+B -> let T id ; 
+B -> if G 
+B -> S
+T -> int 
+T -> string
+T -> boolean
+G -> ( E ) S
+G -> { C } O
+C -> B C 
+C -> lambda
+O -> else { C } 
+O -> lambda
+S -> id W 
+S -> print ( E ) ; 
+S -> input ( id ) ; 
+S -> return X ; 
+W -> - = E ;
+W -> = E ;
+W -> ( L ) ;
+X -> E 
+X -> lambda
+L -> E Q 
+L -> lambda
+Q -> , E Q
+Q -> lambda
+F -> function id H ( A ) { C }
+H -> T 
+H -> lambda
+A -> T id K
+A -> lambda
+K -> , T id K
+K -> lambda
+E -> R E_
+E_ -> && R E_
+E_ -> lambda
+R -> U R_
+R_ -> < U R_ 
+R_ -> > U R_
+R_ -> lambda
+U -> V U_
+U_ -> + V U_ 
+U_ -> - V U_
+U_ -> lambda
+V -> id D
+V -> ( E ) 
+V -> entero
+V -> cadena
+D -> ( L )
+D -> lambda
+}
