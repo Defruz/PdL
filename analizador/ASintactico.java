@@ -280,7 +280,7 @@ public class ASintactico {
     }
 
     private void r(){
-        if(nombre().equals("id") || nombre().equals("pAbierto") || nombre().equals("numEnt") || nombre().equals("cadena"){
+        if(nombre().equals("id") || nombre().equals("pAbierto") || nombre().equals("numEnt") || nombre().equals("cadena")){
             imprimir(39);
             u();
             r_();
@@ -305,7 +305,7 @@ public class ASintactico {
     }
 
     private void u(){
-        if(nombre().equals("id") || nombre().equals("pAbierto") || nombre().equals("numEnt") || nombre().equals("cadena"){
+        if(nombre().equals("id") || nombre().equals("pAbierto") || nombre().equals("numEnt") || nombre().equals("cadena")){
             imprimir(43);
             v();
             u_();
