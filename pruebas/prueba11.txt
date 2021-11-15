@@ -1,0 +1,9 @@
+let int   a   ;
+let int    b  ;
+
+function operacion
+ int (int num1_, int num2_)
+{
+	return number;
+}
+

@@ -16,7 +16,6 @@ public class ALexico {
     private ArrayList<Token> listaTokens = new ArrayList<>();
     private int posTS;
     private int linea;
-    private boolean fun;
 
     // Definicion del objeto Token que se generara dependiendo del atributo
     public class Token {
@@ -66,10 +65,6 @@ public class ALexico {
             "let" };
     private ArrayList<String> pReservadas = new ArrayList<>(Arrays.asList(palabras));
     private ArrayList<String> tablaGlobal;
-    private Character[] simbolos = new Character[] { '+', '-', '=', '(', ')', '{', '}', '&', ',', ';', '>', '<', 32, 13,
-            9, 10 };
-    private ArrayList<String> tablas;
-    private ArrayList<Character> simbolosLeng = new ArrayList<>(Arrays.asList(simbolos));
 
     public void aLexico(String fichero) {
         try {
@@ -80,8 +75,6 @@ public class ALexico {
             posTS = 1;
             tablaGlobal = new ArrayList<>();
             linea = 1;
-            tablas = new ArrayList<>();
-            fun = false;
 
             while (bufferedReader.ready()) {
                 caracter = (char) bufferedReader.read();
@@ -109,7 +102,7 @@ public class ALexico {
                         break;
 
                     case '{':
-                        generarToken("kabierta", "");
+                        generarToken("kAbierta", "");
                         break;
 
                     case ')':
@@ -184,20 +177,13 @@ public class ALexico {
                         estado = 0;
                         generarToken(lexema, "");
                         estadoAux(caracter);
-                        fun = true;
                     } else if (pReservadas.contains(lexema)) {
                         estado = 0;
                         generarToken(lexema, "");
                         estadoAux(caracter);
                     } else {
                         estado = 0;
-                        if (!tablaGlobal.contains(lexema) && fun) {
-                            tablaGlobal.add(lexema);
-                            generarToken("id", posTS);
-                            posTS++;
-                            tablas.add(lexema);
-                            fun = false;
-                        } else if (!tablaGlobal.contains(lexema)) {
+                        if (!tablaGlobal.contains(lexema)) {
                             tablaGlobal.add(lexema);
                             generarToken("id", posTS);
                             posTS++;
@@ -405,9 +391,6 @@ public class ALexico {
                 {
                     pw.println("*'" + imp + "'");
                 }
-            }
-            for (int i = 0; i < tablas.size(); i++) {
-                pw.println("Tabla" + tablas.get(i) + " #" + i + 2 + ":");
             }
         } catch (Exception e) {
             e.printStackTrace();

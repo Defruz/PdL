@@ -1,6 +1,5 @@
 package analizador;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -58,7 +57,10 @@ public class ASintactico {
             System.out.println("Error sintactico");
             System.exit(0); // Se detiene la ejecucion del proceso (en este caso el ASintactico)
         }
-        imprimir(3); // Solo desde p se llega a fin de fichero "$"
+        else{
+            imprimir(3); // Solo desde p se llega a fin de fichero "$"
+        }
+        
     }
 
     private void b() {
@@ -384,7 +386,6 @@ public class ASintactico {
             fichero = new FileWriter("Parse.txt");
             pw = new PrintWriter(fichero);
             pw.print("Descendente ");
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -393,16 +394,8 @@ public class ASintactico {
     private void imprimir(int parse) {
         try {
             pw.print(parse + " ");
-
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (null != fichero)
-                    fichero.close();
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
         }
     }
 

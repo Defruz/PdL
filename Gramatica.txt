@@ -1,4 +1,4 @@
-Terminales = { let id ; if int string boolean ( ) { } else print input return - = -= , function && < > + entero cadena lambda }
+Terminales = { let id ; if int string boolean ( ) { } else print input return - = -= , function && < > + entero cadena }
 NoTerminales = { P B T G C O S W Z M X L Q F H A K E E_ R R_ U U_ V D }
 //// Se ha utilizado _ para denotar la ' (prima)
 Axioma = P

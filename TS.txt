@@ -1,0 +1,7 @@
+TablaGlobal #01:
+*'a'
+*'b'
+*'operacion'
+*'num1_'
+*'num2_'
+*'number'
