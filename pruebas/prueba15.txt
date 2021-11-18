@@ -1,0 +1,47 @@
+
+
+
+// Ejemplo #2
+
+let string	cadena;
+input(cadena);
+let boolean logico1;
+let boolean logico2;
+let int		int2;
+
+print
+
+(
+
+12345 //
+
+)
+
+;
+int1 = 000000378;
+
+int2 = int1;
+cadena = 'string';
+
+function ff string(string ss)
+{
+	logico2 =  logico1;
+	if (logico2) cadena = ff (ss);
+	varglobal = 78;
+	return cadena;
+}
+		
+function funcion string (string logico2)
+{
+	let int var;
+
+  if (logico1){
+	logico1 = int1 < int2;logico2='';
+  }else{print(0);}
+  
+  
+  return logico2;
+}
+cadena = (ff(funcion(cadena)));
+print(cadena);
+

@@ -317,7 +317,7 @@ public class ALexico {
             break;
 
         case '{':
-            generarToken("kabierta", "");
+            generarToken("kAbierta", "");
             break;
 
         case ')':

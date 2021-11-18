@@ -23,8 +23,8 @@ public class ASintactico {
         i++;
         return listaTokens.get(i);
     }
-
     private void equipara(String t) {
+        
         if (token.getNombre().equals(t)) {
             token = siguiente();
         } else {
@@ -34,9 +34,10 @@ public class ASintactico {
             } catch (Exception e2) {
                 e2.printStackTrace();
             }
-            System.out.println("Error sintactico");
+            System.out.println("Error sintactico" + " " + token.getNombre() + " " + t);
             System.exit(0); // Se detiene la ejecucion del proceso (en este caso el ASintactico)
         }
+        System.out.println(token.getNombre() + " " + t);
     }
 
     private String nombre() {
