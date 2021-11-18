@@ -34,10 +34,9 @@ public class ASintactico {
             } catch (Exception e2) {
                 e2.printStackTrace();
             }
-            System.out.println("Error sintactico" + " " + token.getNombre() + " " + t);
+            System.out.println("Error sintactico" + " "+ token.getNombre() +" "+ t);
             System.exit(0); // Se detiene la ejecucion del proceso (en este caso el ASintactico)
         }
-        System.out.println(token.getNombre() + " " + t);
     }
 
     private String nombre() {
@@ -74,6 +73,9 @@ public class ASintactico {
         } else if (nombre().equals("if")) {
             imprimir(5);
             equipara(nombre());
+            equipara("pAbierto");
+            e();
+            equipara("pCerrado");
             g();
         } else if (nombre().equals("id") || nombre().equals("input") || nombre().equals("return")
                 || nombre().equals("print")) {
@@ -96,11 +98,9 @@ public class ASintactico {
     }
 
     private void g() {
-        if (nombre().equals("pAbierto")) {
+        if (nombre().equals("id") || nombre().equals("input") || nombre().equals("return")
+        || nombre().equals("print")) {
             imprimir(10);
-            equipara(nombre());
-            e();
-            equipara("pCerrado");
             s();
         } else if (nombre().equals("kAbierta")) {
             imprimir(11);
@@ -189,7 +189,6 @@ public class ASintactico {
             e();
         } else if (nombre().equals("puntComa")) {
             imprimir(24);
-            equipara(nombre());
         }
     }
 

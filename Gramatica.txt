@@ -7,12 +7,12 @@ P -> B P
 P -> F P
 P -> lambda
 B -> let T id ; 
-B -> if G 
+B -> if ( E ) G 
 B -> S
 T -> int 
 T -> string
 T -> boolean
-G -> ( E ) S
+G -> S
 G -> { C } O
 C -> B C 
 C -> lambda
