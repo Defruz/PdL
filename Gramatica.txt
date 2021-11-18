@@ -22,7 +22,7 @@ S -> id W
 S -> print ( E ) ; 
 S -> input ( id ) ; 
 S -> return X ; 
-W -> - = E ;
+W -> -= E ;
 W -> = E ;
 W -> ( L ) ;
 X -> E 
