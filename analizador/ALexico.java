@@ -56,7 +56,7 @@ public class ALexico {
         listaTokens.add(token);
     }
 
-    public ArrayList<Token> getLista(){
+    public ArrayList<Token> getLista() {
         return listaTokens;
     }
 
@@ -253,16 +253,15 @@ public class ALexico {
                     break;
 
                 case 7:
-                    if(caracter == '&'){   
+                    if (caracter == '&') {
                         generarToken("and", "");
                         estado = 0;
-                    }
-                    else {
+                    } else {
                         estado = 0;
                         bufferedReader.readLine();
-                            System.out.println(
-                                    "Error Linea " + linea + ": se ha recibido solamente un solo caracter '&', entrada no valida");
-                            linea++;
+                        System.out.println("Error Linea " + linea
+                                + ": se ha recibido solamente un solo caracter '&', entrada no valida");
+                        linea++;
                     }
                 }
 
@@ -329,8 +328,8 @@ public class ALexico {
             generarToken("pAbierto", "");
             break;
 
-        case '!':
-            generarToken("negacion", "");
+        case '&':
+            estado = 7;
             break;
 
         case '+':
@@ -404,5 +403,4 @@ public class ALexico {
         }
     }
 
-   
 }
