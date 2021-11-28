@@ -1,7 +1,5 @@
 TablaGlobal #01:
-*'a'
 *'b'
-*'number'
-*'operacion'
-*'num1'
-*'num2'
+*'x'
+*'z'
+*'y'

@@ -23,8 +23,9 @@ public class ASintactico {
         i++;
         return listaTokens.get(i);
     }
+
     private void equipara(String t) {
-        
+
         if (token.getNombre().equals(t)) {
             token = siguiente();
         } else {
@@ -34,7 +35,8 @@ public class ASintactico {
             } catch (Exception e2) {
                 e2.printStackTrace();
             }
-            System.out.println("Error sintactico" + " "+ token.getNombre() +" "+ t);
+            System.out.println("Error sintactico: " + "se encuentra el token " + token.getNombre()
+                    + " cuando deberia aparecer el token " + t);
             System.exit(0); // Se detiene la ejecucion del proceso (en este caso el ASintactico)
         }
     }
@@ -56,11 +58,10 @@ public class ASintactico {
         } else if (!token.getNombre().equals("$")) {
             System.out.println("Error sintactico");
             System.exit(0); // Se detiene la ejecucion del proceso (en este caso el ASintactico)
-        }
-        else{
+        } else {
             imprimir(3); // Solo desde p se llega a fin de fichero "$"
         }
-        
+
     }
 
     private void b() {
@@ -99,7 +100,7 @@ public class ASintactico {
 
     private void g() {
         if (nombre().equals("id") || nombre().equals("input") || nombre().equals("return")
-        || nombre().equals("print")) {
+                || nombre().equals("print")) {
             imprimir(10);
             s();
         } else if (nombre().equals("kAbierta")) {
@@ -281,8 +282,9 @@ public class ASintactico {
         }
     }
 
-    private void r(){
-        if(nombre().equals("id") || nombre().equals("pAbierto") || nombre().equals("numEnt") || nombre().equals("cadena")){
+    private void r() {
+        if (nombre().equals("id") || nombre().equals("pAbierto") || nombre().equals("numEnt")
+                || nombre().equals("cadena")) {
             imprimir(39);
             u();
             r_();
@@ -306,62 +308,60 @@ public class ASintactico {
         }
     }
 
-    private void u(){
-        if(nombre().equals("id") || nombre().equals("pAbierto") || nombre().equals("numEnt") || nombre().equals("cadena")){
+    private void u() {
+        if (nombre().equals("id") || nombre().equals("pAbierto") || nombre().equals("numEnt")
+                || nombre().equals("cadena")) {
             imprimir(43);
             v();
             u_();
         }
     }
 
-    private void u_(){
-        if(nombre().equals("suma")){
+    private void u_() {
+        if (nombre().equals("suma")) {
             imprimir(44);
             equipara(nombre());
             v();
             u_();
-        }
-        else if(nombre().equals("resta")){
+        } else if (nombre().equals("resta")) {
             imprimir(45);
             equipara(nombre());
             v();
             u_();
-        }
-        else if(nombre().equals("puntComa") || nombre().equals("pCerrado") || nombre().equals("coma") || nombre().equals("and") || nombre().equals("mayor") || nombre().equals("menor")){
+        } else if (nombre().equals("puntComa") || nombre().equals("pCerrado") || nombre().equals("coma")
+                || nombre().equals("and") || nombre().equals("mayor") || nombre().equals("menor")) {
             imprimir(46);
         }
     }
 
-    private void v(){
-        if(nombre().equals("id")){
+    private void v() {
+        if (nombre().equals("id")) {
             imprimir(47);
             equipara(nombre());
             d();
-        }
-        else if(nombre().equals("pAbierto")){
+        } else if (nombre().equals("pAbierto")) {
             imprimir(48);
             equipara(nombre());
             e();
             equipara("pCerrado");
-        }
-        else if(nombre().equals("numEnt")){
+        } else if (nombre().equals("numEnt")) {
             imprimir(49);
             equipara(nombre());
-        }
-        else if(nombre().equals("cadena")){
+        } else if (nombre().equals("cadena")) {
             imprimir(50);
             equipara(nombre());
         }
     }
 
-    private void d(){
-        if(nombre().equals("pAbierto")){
+    private void d() {
+        if (nombre().equals("pAbierto")) {
             imprimir(51);
             equipara(nombre());
             l();
             equipara("pCerrado");
-        }
-        else if(nombre().equals("puntComa") || nombre().equals("pCerrado") || nombre().equals("coma") || nombre().equals("and") || nombre().equals("mayor") || nombre().equals("menor") || nombre().equals("suma") || nombre().equals("resta")){
+        } else if (nombre().equals("puntComa") || nombre().equals("pCerrado") || nombre().equals("coma")
+                || nombre().equals("and") || nombre().equals("mayor") || nombre().equals("menor")
+                || nombre().equals("suma") || nombre().equals("resta")) {
             imprimir(52);
         }
     }
