@@ -1,5 +1,7 @@
 TablaGlobal #01:
-*'texto'
-*'pideTexto'
-*'alert'
-*'msg'
+*'a'
+*'b'
+*'number'
+*'operacion'
+*'num1'
+*'num2'
