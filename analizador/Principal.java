@@ -5,11 +5,9 @@ import java.io.File;
 public class Principal {
     public static void main(String[] args) {
         String filePath = new File("").getAbsolutePath();
-        filePath = filePath.concat("\\pruebas\\prueba12.txt");
-        ALexico aLex = new ALexico();
-        aLex.aLexico(filePath);
-        aLex.generarToken("$", ""); //Se añade fin de fichero al terminar la lista de tokens
-        ASintactico aSin = new ASintactico(aLex.getLista());
+        filePath = filePath.concat("\\pruebas\\prueba17.txt");
+        ALexico aLex = new ALexico(filePath);
+        ASinSem aSin = new ASinSem(aLex);
         aSin.aSintactico();
     }
 }
