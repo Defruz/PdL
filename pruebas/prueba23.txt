@@ -1,0 +1,13 @@
+let string texto;
+function alert (string msg)
+{
+	print (msg);
+}
+function pideTexto ()
+{
+	print ('Introduce un texto');
+	input (texto);
+}
+pideTexto();
+  alert
+	(texto);

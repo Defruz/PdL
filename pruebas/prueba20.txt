@@ -1,0 +1,9 @@
+let int a;
+let   int  b;
+let boolean bbb;
+a = 3;
+b=a				    		 	 	 	 	 	 	 	 	 	 	 	 	 	 	 													;
+if (a < b) b = 1;
+a = a + b;
+print (a) ;
+print(b);

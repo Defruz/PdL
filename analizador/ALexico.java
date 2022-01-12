@@ -17,20 +17,28 @@ public class ALexico {
     private ArrayList<Token> listaTokens = new ArrayList<>();
     private int posTS;
     private int linea;
+    private TablaS tabla;
+    private boolean zonaDecl;
 
-    public ALexico(String fichero) {
+    public ALexico(String fichero, TablaS tabla) {
         try {
             fileReader = new FileReader(fichero);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         bufferedReader = new BufferedReader(fileReader);
-        tablaGlobal = new ArrayList<>();
+        // tablaGlobal = new ArrayList<>();
+        this.tabla = tabla;
         contador = 0;
         estado = 0;
         posTS = 1;
         linea = 1;
         aux = null;
+        zonaDecl = false;
+    }
+
+    public int getLinea(){
+        return this.linea;
     }
 
     // Definicion del objeto Token que se generara dependiendo del atributo
@@ -38,15 +46,17 @@ public class ALexico {
         private String nombre;
         private String atributoS;
         private int atributoI;
+        private String tabla;
 
         private Token(String nombre, String atributoS) {
             this.nombre = nombre;
             this.atributoS = atributoS;
         }
 
-        private Token(String nombre, int atributoI) {
+        private Token(String nombre, int atributoI, String tabla) {
             this.nombre = nombre;
             this.atributoI = atributoI;
+            this.tabla = tabla;
         }
 
         public String getNombre() {
@@ -60,6 +70,10 @@ public class ALexico {
         public String getAtributoS() {
             return this.atributoS;
         }
+
+        public String getTabla(){
+            return this.tabla;
+        }
     }
 
     public Token generarToken(String nombre, String atributo) {
@@ -68,8 +82,8 @@ public class ALexico {
         return token;
     }
 
-    private Token generarToken(String nombre, int atributo) {
-        Token token = new Token(nombre, atributo);
+    private Token generarToken(String nombre, int atributo, String tabla) {
+        Token token = new Token(nombre, atributo, tabla);
         listaTokens.add(token);
         return token;
     }
@@ -82,16 +96,15 @@ public class ALexico {
     private String[] palabras = new String[] { "if", "else", "print", "input", "return", "string", "int", "boolean",
             "let" };
     private ArrayList<String> pReservadas = new ArrayList<>(Arrays.asList(palabras));
-    private ArrayList<String> tablaGlobal;
+    // private ArrayList<String> tablaGlobal;
 
     public Token aLexico() {
         try {
             while (bufferedReader.ready() || aux != null) {
-                if (aux != null){
+                if (aux != null) {
                     caracter = aux;
                     aux = null;
-                }
-                else{
+                } else {
                     caracter = (char) bufferedReader.read();
                 }
                 switch (estado) {
@@ -166,14 +179,31 @@ public class ALexico {
                             return generarToken(lexema, "");
                         } else {
                             estado = 0;
-                            if (!tablaGlobal.contains(lexema)) {
-                                tablaGlobal.add(lexema);
-                                aux = caracter;
-                                return generarToken("id", posTS++);
+                            posTS = tabla.indexOfLex(lexema);
+                            if (posTS < 0) {
+                                if (zonaDecl) {
+                                    // tablaGlobal.add(lexema);
+                                    tabla.insertaLexema(lexema);
+                                    aux = caracter;
+                                    return generarToken("id", tabla.getTSActualSize(), "actual");
+                                } else {
+                                    posTS = tabla.indexOfLexG(lexema);
+                                    if (posTS < 0) {
+                                        // tablaGlobal.add(lexema);
+                                        tabla.insertaLexema(lexema);
+                                        aux = caracter;
+                                        return generarToken("id", tabla.getTSActualSize(), "actual");
+                                    } else {
+                                        aux = caracter;
+                                        return generarToken("id", posTS + 1, "global");
+                                    }
+                                }
                             } else {
-                                int pos = tablaGlobal.indexOf(lexema) + 1;
+                                if (zonaDecl) {
+                                    System.out.println("Error al redeclarar una variable");
+                                }
                                 aux = caracter;
-                                return generarToken("id", pos);
+                                return generarToken("id", posTS + 1, "actual");
                             }
                         }
                         break;
@@ -185,7 +215,7 @@ public class ALexico {
                             estado = 0;
                             if (valor < 32768) {
                                 aux = caracter;
-                                return generarToken("numEnt", valor);
+                                return generarToken("numEnt", valor, "");
                             } else {
                                 System.out.println(
                                         "Error Linea " + linea + ": el valor supera el entero maximo del lenguaje");
@@ -257,41 +287,23 @@ public class ALexico {
         return null;
     }
 
-    private void imprimirTokens() {
+    public void actualizarZonaDecl(boolean act) {
+        zonaDecl = act;
+    }
+
+    public void imprimirTokens() {
         FileWriter fichero = null;
         PrintWriter pw = null;
         try {
             fichero = new FileWriter("Tokens.txt");
             pw = new PrintWriter(fichero);
             for (Token imp : listaTokens) {
-                if (imp.atributoS != null) {
-                    pw.println("<" + imp.getNombre() + "," + imp.getAtributoS() + ">");
-                } else {
-                    pw.println("<" + imp.getNombre() + "," + imp.getAtributoI() + ">");
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (null != fichero)
-                    fichero.close();
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        }
-    }
-
-    private void imprimirTabla() {
-        FileWriter fichero = null;
-        PrintWriter pw = null;
-        try {
-            fichero = new FileWriter("TS.txt");
-            pw = new PrintWriter(fichero);
-            pw.println("TablaGlobal #01:");
-            for (String imp : tablaGlobal) {
-                {
-                    pw.println("*'" + imp + "'");
+                if (!imp.getNombre().equals("$")) {
+                    if (imp.atributoS != null) {
+                        pw.println("<" + imp.getNombre() + "," + imp.getAtributoS() + ">");
+                    } else {
+                        pw.println("<" + imp.getNombre() + "," + imp.getAtributoI() + ">");
+                    }
                 }
             }
         } catch (Exception e) {

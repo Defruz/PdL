@@ -1,5 +1,20 @@
-TablaGlobal #01:
-*'b'
-*'x'
-*'z'
-*'y'
+#1:
+*'texto'
++tipo:'cadena'
++despl:0
+*'alert'
++tipo:'function'
++tipoRetorno:'vacio'
++etiqFuncion:'Et1_alert'
++numParam:1
++tipoParam1:'cadena'
+*'pideTexto'
++tipo:'function'
++tipoRetorno:'vacio'
++etiqFuncion:'Et2_pideTexto'
++numParam:0
+#2:
+*'msg'
++tipo:'cadena'
++despl:0
+#3:
