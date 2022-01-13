@@ -1,0 +1,13 @@
+let int   a   ;
+let boolean    b  ;
+let int number;
+print ( 'Introduce el primer operando' );
+input (a);
+print ('Introduce el segundo operando');input(b);
+function  operacion	int(int num_1, int num_2)
+{
+	return  num_1 + num_2-77;
+}
+
+number = operacion (a, b);
+print (b);

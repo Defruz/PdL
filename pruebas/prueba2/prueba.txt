@@ -1,44 +1,13 @@
-let int z;
-let boolean boolean_1;
-let int x;
-let string ss;
-let int xx;
-let boolean boolean_2;
+let int a;
+let   int  b;
+let boolean bbb;
+a = 3;
+b=a					    		 	 	 	 	 	 	 	 	 	 	 	 	 	 	 													;
+let boolean c;
 
+c = a > b;
 
-print
-
-(
-
-12345 //
-
-)
-
-;
-
-function f1 int(int f1, boolean b1)
-{
-		print(ss);
-		x = xx+f1;
-		boolean_1 = ! boolean_2;
-		return (01234);
-}
-
-
-function f2 boolean(int f2, boolean b1)
-{
-		print ((04-5-77+(88-f2)));
-		return !! b1;
-}
-
-x =
-  x + 6	
-    + z 
-    - 1
-    - (2
-    + y 
-    - 6)
-	;
-	
-	
-boolean_2=(f2 (f1 (x, boolean_1), boolean_2));
+if (c) b -= 3333;
+a = a + b;
+print (a) ;
+print(b);

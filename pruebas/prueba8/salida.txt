@@ -1,0 +1,8 @@
+Error Semantico en la linea 11, la expresion no es correcta
+Error Semantico en la linea 11, la asignacion no es correcta
+Error Semantico en la linea 12, la expresion no es correcta
+Error Semantico en la linea 12, la asignacion no es correcta
+Error Semantico en el retorno de la funcion de la linea 8
+Error Semantico en el cuerpo de la funcion de la linea 8
+Error Semantico en el retorno de la funcion de la linea 20
+Error Semantico en la linea 27, la asignacion no es correcta

@@ -1,0 +1,8 @@
+Error Semantico en la linea 6, no se puede realizar el input de una variable logica
+Error Semantico en la linea 11, la expresion no es correcta
+Error Semantico en la linea 11, la asignacion no es correcta
+Error Semantico en el retorno de la funcion de la linea 7
+Error Semantico en el cuerpo de la funcion de la linea 7
+Error Semantico en la linea 15, los parametros de esta funcion no son correctos
+Error Semantico en la linea 15, la expresion no es correcta
+Error Semantico en la linea 15, no se ha podido realizar el print
