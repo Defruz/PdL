@@ -85,6 +85,10 @@ public class ASinSem {
             System.out.println(
                     "Error sintactico en la linea : " + aLex.getLinea() + " se encuentra el token " + token.getNombre()
                             + " cuando deberia aparecer el token " + t);
+            while(!token.getNombre().equals("$")){
+                token = siguiente();
+            }
+            aLex.imprimirTokens();
             System.exit(0); // Se detiene la ejecucion del proceso (en este caso el ASintactico)
         }
     }

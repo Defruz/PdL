@@ -1,0 +1,3 @@
+Error Léxico Linea 4: la cadena ha excedido el maximo de caracteres.
+Error sintactico en la linea : 5 se encuentra el token input cuando deberia aparecer el token pCerrado
+Error Lexico Linea 9: el valor supera el entero maximo del lenguaje

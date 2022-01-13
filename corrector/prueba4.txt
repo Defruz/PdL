@@ -1,0 +1,15 @@
+
+
+	let	boolean	b;let intb x;
+input (2x);
+print (x);
+input (_z);
+print (x+z);
+b=x<=z;if (b)
+x =
+  x + 67777
+    - z
+    - 1
+    + (2
+    - y
+    + 7);

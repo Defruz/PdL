@@ -1,0 +1,118 @@
+let int n1;
+let int n2;
+let int n3;
+let boolean b1;
+let boolean b2;
+let boolean b3;
+let string s1;
+let string s2;
+let string s3;
+
+function f1 ()
+{
+	let boolean nn;
+	let int n2;
+	print (5 + n);
+}
+function f7 string(string n4)
+{
+	print (n4);
+	let int bbb;
+	return s1;
+}
+function f2 (boolean b4, int n4)
+{
+	let string b5;
+	let int n2;
+	let string s3;
+	n4=n2;
+	b5=s2;
+	if (n2 > n4) f1 ();
+}
+
+function f3 int (int n2)
+{
+	let string k;
+	let string 
+	  ;
+	let int 
+	  n3;
+	s3=s2;
+	if (n1 > n2) n4= f3 (n3 + 3);
+	return n3;
+}
+
+function f4 boolean (string b1, boolean n1, int s1)
+{
+	let string f6;
+	let string sbn;
+	n=33;
+	let string n;
+	n=b1;
+	return ! b2;
+}
+function f5 string (int f1, int f2, string f4, string f6, int f5 )
+{
+	let boolean ff;
+	if (f5 > f8) return f4;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+b2
+   = 
+      (n1 > f3 (n1));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+b3 
+	=
+	
+		! f4 ('end', b3, f3(nnnn));
