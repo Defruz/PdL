@@ -120,21 +120,23 @@ public class ASinSem {
         if (nombre().equals("let")) {
             Atrib t;
             int id_pos;
+            String tab;
             aLex.actualizarZonaDecl(true);
             imprimir(4);
             equipara(nombre());
             t = t();
             id_pos = token.getAtributoI();
+            tab = token.getTabla();
             equipara("id");
             aLex.actualizarZonaDecl(false);
             equipara("puntComa");
 
-            tabla.insertaTipoTS(id_pos, t.getTipo());
-            if (tabla.inTSL()) {
-                tabla.insertaDespTS(id_pos, iToS(despL));
+            tabla.insertaTipoTS(tab, id_pos, t.getTipo());
+            if (tab.equals("global")) {
+                tabla.insertaDespTS(tab, id_pos, iToS(despL));
                 despL += t.getAncho();
             } else {
-                tabla.insertaDespTS(id_pos, iToS(despG));
+                tabla.insertaDespTS(tab, id_pos, iToS(despG));
                 despG += t.getAncho();
             }
             b = new Atrib("tipo_ok");
@@ -295,12 +297,12 @@ public class ASinSem {
                     s = new Atrib("tipo_error");
                 }
             } else if (tabla.buscaTipo(tab, id_pos) == null) {
-                tabla.insertaTipoTS(id_pos, "entero");
-                if (tabla.inTSL()) {
-                    tabla.insertaDespTS(id_pos, iToS(despL));
+                tabla.insertaTipoTS(tab, id_pos, "entero");
+                if (tab.equals("global")) {
+                    tabla.insertaDespTS(tab, id_pos, iToS(despL));
                     despL += 1;
                 } else {
-                    tabla.insertaDespTS(id_pos, iToS(despG));
+                    tabla.insertaDespTS(tab, id_pos, iToS(despG));
                     despG += 1;
                 }
                 s = new Atrib("tipo_ok");
@@ -347,12 +349,12 @@ public class ASinSem {
                 System.out.println(
                         "Error Semantico en la linea " + linea + ", no se puede realizar el input de una variable logica");
             } else {
-                tabla.insertaTipoTS(id_pos, "entero");
-                if (tabla.inTSL()) {
-                    tabla.insertaDespTS(id_pos, iToS(despL));
+                tabla.insertaTipoTS(tab, id_pos, "entero");
+                if (!tab.equals("global")) {
+                    tabla.insertaDespTS(tab, id_pos, iToS(despL));
                     despL += 1;
                 } else {
-                    tabla.insertaDespTS(id_pos, iToS(despG));
+                    tabla.insertaDespTS(tab, id_pos, iToS(despG));
                     despG += 1;
                 }
                 s = new Atrib("tipo_ok");
@@ -489,7 +491,7 @@ public class ASinSem {
 
             tabla.insertaTipoParam(id_pos, a.getParam());
             for (int i = 0; i < cont; i++) {
-                tabla.insertaDespTS(i + 1, iToS(despL));
+                tabla.insertaDespTS(tab, i + 1, iToS(despL));
                 despL += tabla.anchoTipo(tabla.buscaTipo(tab, i + 1));
             }
             cont = 0;
@@ -527,12 +529,14 @@ public class ASinSem {
             Atrib t;
             Atrib k;
             int id_pos;
+            String tab;
             imprimir(32);
             t = t();
             id_pos = token.getAtributoI();
+            tab = token.getTabla();
             equipara("id");
             k = k();
-            tabla.insertaTipoTS(id_pos, t.getTipo());
+            tabla.insertaTipoTS(tab, id_pos, t.getTipo());
             cont++;
             // tabla.insertaDespTS(id_pos, iToS(despL));
             // despL += t.getAncho();
@@ -554,13 +558,15 @@ public class ASinSem {
             Atrib t;
             Atrib k1;
             int id_pos;
+            String tab;
             imprimir(34);
             equipara(nombre());
             t = t();
             id_pos = token.getAtributoI();
+            tab = token.getTabla();
             equipara("id");
             k1 = k();
-            tabla.insertaTipoTS(id_pos, t.getTipo());
+            tabla.insertaTipoTS(tab, id_pos, t.getTipo());
             cont++;
             // tabla.insertaDespTS(id_pos, iToS(despL));
             // despL += t.getAncho();
@@ -751,12 +757,12 @@ public class ASinSem {
                     v = new Atrib("tipo_error", 0);
                 }
             } else if (tabla.buscaTipo(tab, id_pos) == null) {
-                tabla.insertaTipoTS(id_pos, "entero");
-                if (tabla.inTSL()) {
-                    tabla.insertaDespTS(id_pos, iToS(despL));
+                tabla.insertaTipoTS(tab, id_pos, "entero");
+                if (tab.equals("global")) {
+                    tabla.insertaDespTS(tab, id_pos, iToS(despL));
                     despL += 1;
                 } else {
-                    tabla.insertaDespTS(id_pos, iToS(despG));
+                    tabla.insertaDespTS(tab, id_pos, iToS(despG));
                     despG += 1;
                 }
                 v = new Atrib("entero", 1);

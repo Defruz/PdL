@@ -26,6 +26,10 @@ public class TablaS {
         return tablaActual.size();
     }
 
+    public int getTSGlobalSize(){
+        return tablaGlobal.size();
+    }
+
     public void destruyeTS() {
         guardarTabla();
         this.tablaActual = tablaGlobal;
@@ -41,12 +45,22 @@ public class TablaS {
         tablaGlobal.get(tablaGlobal.size() - 1).put("lexema", nombre);
     }
 
-    public void insertaTipoTS(int pos, String tipo) {
-        tablaActual.get(pos - 1).put("tipo", tipo);
+    public void insertaTipoTS(String nombre, int pos, String tipo) {
+        if(nombre.equals("global")){
+            tablaGlobal.get(pos - 1).put("tipo", tipo);
+        }else{
+            tablaActual.get(pos - 1).put("tipo", tipo);
+        }
+        
     }
 
-    public void insertaDespTS(int pos, String desp) {
-        tablaActual.get(pos - 1).put("despl", desp);
+    public void insertaDespTS(String nombre, int pos, String desp) {
+        if(nombre.equals("global")){
+            tablaGlobal.get(pos - 1).put("despl", desp);
+        }
+        else{
+            tablaActual.get(pos - 1).put("despl", desp);
+        }
     }
 
     public void insertaTipoRet(int pos, String ret) {
@@ -104,13 +118,6 @@ public class TablaS {
 
     public String buscaParam(int pos) {
         return tablaGlobal.get(pos - 1).get("tipoParam");
-    }
-
-    public boolean inTSL() {
-        if (tablaActual == tablaGlobal) {
-            return false;
-        }
-        return true;
     }
 
     private void guardarTabla() {

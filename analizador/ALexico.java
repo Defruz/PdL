@@ -192,7 +192,7 @@ public class ALexico {
                                         // tablaGlobal.add(lexema);
                                         tabla.insertaGlobal(lexema);
                                         aux = caracter;
-                                        return generarToken("id", tabla.getTSActualSize(), "global");
+                                        return generarToken("id", tabla.getTSGlobalSize(), "global");
                                     } else {
                                         aux = caracter;
                                         return generarToken("id", posTS + 1, "global");

@@ -37,14 +37,10 @@
 #2:
 *'f1'
 +tipo:'entero'
-+despl:0
 *'b1'
 +tipo:'logico'
-+despl:1
 #3:
 *'f2'
 +tipo:'entero'
-+despl:0
 *'b1'
 +tipo:'logico'
-+despl:1

@@ -32,4 +32,4 @@ x =
 	;
 	
 
-print (f1 (x, f2 (3, boolean_2)));
+print f1 (x, f2 (3, boolean_2)));

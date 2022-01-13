@@ -1,0 +1,1 @@
+Error sintactico en la linea : 35 se encuentra el token id cuando deberia aparecer el token pAbierto
