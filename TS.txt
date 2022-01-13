@@ -16,11 +16,13 @@
 +despl:4
 *'ff'
 +tipo:'function'
-+tipoRetorno:'vacio'
++tipoRetorno:'logico'
 +etiqFuncion:'Et1_ff'
 +numParam:1
 +tipoParam1:'logico'
 *'varglobal'
++tipo:'entero'
++despl:68
 #2:
 *'ss'
 +tipo:'logico'

@@ -154,13 +154,13 @@ public class ALexico {
                                     lexema = "" + caracter;
                                 } else if (caracter == '_') {
                                     System.out.println(
-                                            "Error Linea " + linea
+                                            "Error Léxico Linea " + linea
                                                     + ": ningun token puede empezar por el caracter '_'");
                                 } else if (caracter == 13) {
                                     linea++;
                                 } else if (caracter != 32 & caracter != 10 && caracter != 9) {
                                     bufferedReader.readLine();
-                                    System.out.println("Error Linea " + linea + ": entrada no reconocida");
+                                    System.out.println("Error Léxico Linea " + linea + ": entrada no reconocida");
                                     linea++;
                                 }
                         }
@@ -200,7 +200,7 @@ public class ALexico {
                                 }
                             } else {
                                 if (zonaDecl) {
-                                    System.out.println("Error al redeclarar una variable");
+                                    System.out.println("Error Semantico en la linea " + getLinea() + "al redeclarar una variable");
                                 }
                                 aux = caracter;
                                 return generarToken("id", posTS + 1, "actual");
@@ -218,7 +218,7 @@ public class ALexico {
                                 return generarToken("numEnt", valor, "");
                             } else {
                                 System.out.println(
-                                        "Error Linea " + linea + ": el valor supera el entero maximo del lenguaje");
+                                        "Error Lexico Linea " + linea + ": el valor supera el entero maximo del lenguaje");
                             }
                         }
                         break;
@@ -238,7 +238,7 @@ public class ALexico {
                         } else {
                             estado = 0;
                             bufferedReader.readLine();
-                            System.out.println("Error Linea " + linea + ": entrada no reconocida");
+                            System.out.println("Error Léxico Linea " + linea + ": entrada no reconocida");
                             linea++;
                         }
                         break;
@@ -257,7 +257,7 @@ public class ALexico {
                                 estado = 0;
                                 bufferedReader.readLine();
                                 System.out.println(
-                                        "Error Linea " + linea + ": la cadena ha excedido el maximo de caracteres.");
+                                        "Error Léxico Linea " + linea + ": la cadena ha excedido el maximo de caracteres.");
                                 linea++;
                             }
                         } else {
@@ -273,7 +273,7 @@ public class ALexico {
                         } else {
                             estado = 0;
                             bufferedReader.readLine();
-                            System.out.println("Error Linea " + linea
+                            System.out.println("Error Léxico Linea " + linea
                                     + ": se ha recibido solamente un solo caracter '&', entrada no valida");
                             linea++;
                         }
