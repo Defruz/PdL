@@ -36,6 +36,11 @@ public class TablaS {
         tablaActual.get(tablaActual.size() - 1).put("lexema", nombre);
     }
 
+    public void insertaGlobal(String nombre) {
+        tablaGlobal.add(new HashMap<>());
+        tablaGlobal.get(tablaGlobal.size() - 1).put("lexema", nombre);
+    }
+
     public void insertaTipoTS(int pos, String tipo) {
         tablaActual.get(pos - 1).put("tipo", tipo);
     }

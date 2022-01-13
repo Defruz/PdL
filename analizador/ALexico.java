@@ -190,9 +190,9 @@ public class ALexico {
                                     posTS = tabla.indexOfLexG(lexema);
                                     if (posTS < 0) {
                                         // tablaGlobal.add(lexema);
-                                        tabla.insertaLexema(lexema);
+                                        tabla.insertaGlobal(lexema);
                                         aux = caracter;
-                                        return generarToken("id", tabla.getTSActualSize(), "actual");
+                                        return generarToken("id", tabla.getTSActualSize(), "global");
                                     } else {
                                         aux = caracter;
                                         return generarToken("id", posTS + 1, "global");

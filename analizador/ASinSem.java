@@ -82,8 +82,9 @@ public class ASinSem {
             } catch (Exception e2) {
                 e2.printStackTrace();
             }
-            System.out.println("Error sintactico en la linea : " + aLex.getLinea() + " se encuentra el token " + token.getNombre()
-                    + " cuando deberia aparecer el token " + t);
+            System.out.println(
+                    "Error sintactico en la linea : " + aLex.getLinea() + " se encuentra el token " + token.getNombre()
+                            + " cuando deberia aparecer el token " + t);
             System.exit(0); // Se detiene la ejecucion del proceso (en este caso el ASintactico)
         }
     }
@@ -108,7 +109,6 @@ public class ASinSem {
         } else {
             imprimir(3); // Solo desde p se llega a fin de fichero "$"
         }
-
     }
 
     private Atrib b() {
@@ -141,6 +141,7 @@ public class ASinSem {
             Atrib g;
             imprimir(5);
             equipara(nombre());
+            int linea = aLex.getLinea();
             equipara("pAbierto");
             e = e();
             equipara("pCerrado");
@@ -148,6 +149,7 @@ public class ASinSem {
             if (!e.getTipo().equals("logico")) {
                 b = new Atrib("tipo_error");
                 b.setTipoRet("vacio");
+                System.out.println("Error en la linea " + linea + ", la condicion del if no es de tipo logico");
             } else {
                 b = new Atrib(g.getTipo());
                 b.setTipoRet(g.getTipoRet());
@@ -161,7 +163,7 @@ public class ASinSem {
             b = new Atrib(s.getTipo());
             b.setTipoRet(s.getTipoRet());
         }
-        //System.out.println(b.tipo + " " + b.getTipoRet());
+        // System.out.println(b.tipo + " " + b.getTipoRet());
         return b;
     }
 
@@ -191,8 +193,6 @@ public class ASinSem {
             s = s();
             g = new Atrib(s.getTipo());
             g.setTipoRet(s.getTipoRet());
-            //System.out.println(g.tipo + " " + g.getTipoRet());
-
         } else if (nombre().equals("kAbierta")) {
             Atrib c;
             Atrib o;
@@ -263,8 +263,7 @@ public class ASinSem {
             o = new Atrib(c.getTipo());
             o.setTipoRet(c.getTipoRet());
             equipara("kCerrada");
-        } else if (nombre().equals("let") || nombre().equals("id") || nombre().equals("if") || nombre().equals("print")
-                || nombre().equals("input") || nombre().equals("return") || nombre().equals("function")) {
+        } else {
             imprimir(15);
             o = new Atrib("tipo_ok");
             o.setTipoRet("vacio");
@@ -278,6 +277,7 @@ public class ASinSem {
             Atrib w;
             int id_pos;
             String tab;
+            int linea = aLex.getLinea();
             imprimir(16);
             id_pos = token.getAtributoI();
             tab = token.getTabla();
@@ -287,6 +287,7 @@ public class ASinSem {
                 if (w.getParam().equals(tabla.buscaParam(id_pos))) {
                     s = new Atrib("tipo_ok");
                 } else {
+                    System.out.println("Error en la linea " + linea + ", los parametros de esta funcion no son correctos");
                     s = new Atrib("tipo_error");
                 }
             } else if (tabla.buscaTipo(tab, id_pos) == null) {
@@ -303,12 +304,12 @@ public class ASinSem {
                 s = new Atrib("tipo_ok");
             } else {
                 s = new Atrib("tipo_error");
-                int lin = aLex.getLinea()-1;
-                System.out.println("Error en la linea " + lin + ", la asignacion no es correcta");
+                System.out.println("Error en la linea " + linea + ", la asignacion no es correcta");
             }
             s.setTipoRet("vacio");
         } else if (nombre().equals("print")) {
             Atrib e;
+            int linea = aLex.getLinea();
             imprimir(17);
             equipara(nombre());
             equipara("pAbierto");
@@ -319,11 +320,13 @@ public class ASinSem {
                 s = new Atrib("tipo_ok");
             } else {
                 s = new Atrib("tipo_error");
+                System.out.println("Error en la linea " + linea + ", no se ha podido realizar el print");
             }
             s.setTipoRet("vacio");
         } else if (nombre().equals("input")) {
             int id_pos;
             String tab;
+            int linea = aLex.getLinea();
             imprimir(18);
             equipara(nombre());
             equipara("pAbierto");
@@ -332,8 +335,13 @@ public class ASinSem {
             equipara("id");
             equipara("pCerrado");
             equipara("puntComa");
-            if (tabla.buscaTipo(tab, id_pos) != null && (tabla.buscaTipo(tab, id_pos).equals("entero") || tabla.buscaTipo(tab, id_pos).equals("cadena"))) {
+            if (tabla.buscaTipo(tab, id_pos) != null && (tabla.buscaTipo(tab, id_pos).equals("entero")
+                    || tabla.buscaTipo(tab, id_pos).equals("cadena"))) {
                 s = new Atrib("tipo_ok");
+            } else if (tabla.buscaTipo(tab, id_pos) != null && tabla.buscaTipo(tab, id_pos).equals("logico")) {
+                s = new Atrib("tipo_error");
+                System.out.println(
+                        "Error en la linea " + linea + ", no se puede realizar el input de una variable logica");
             } else {
                 tabla.insertaTipoTS(id_pos, "entero");
                 if (tabla.inTSL()) {
@@ -348,6 +356,7 @@ public class ASinSem {
             s.setTipoRet("vacio");
         } else if (nombre().equals("return")) {
             Atrib x;
+            int linea = aLex.getLinea();
             imprimir(19);
             equipara(nombre());
             x = x();
@@ -356,6 +365,7 @@ public class ASinSem {
                 s = new Atrib("tipo_ok");
             } else {
                 s = new Atrib("tipo_error");
+                System.out.println("Error en la linea " + linea + ", la expresion del return no es valida");
             }
             s.setTipoRet(x.getTipo());
         }
@@ -455,6 +465,7 @@ public class ASinSem {
             Atrib c;
             int id_pos;
             String tab;
+            int linea = aLex.getLinea();
             imprimir(29);
             equipara(nombre());
             id_pos = token.getAtributoI();
@@ -471,26 +482,21 @@ public class ASinSem {
             equipara("pCerrado");
             aLex.actualizarZonaDecl(false);
             equipara("kAbierta");
-            if (a.getTipo().equals("tipo_error")) {
-                int lin = aLex.getLinea()-1;
-                System.out.println("Error en los parametros de la funcion en la linea " + lin);
-            } else {
-                tabla.insertaTipoParam(id_pos, a.getParam());
-                for (int i = 0; i < cont; i++){
-                    tabla.insertaDespTS(i+1, iToS(despL));
-                    despL += tabla.anchoTipo(tabla.buscaTipo(tab, i+1));
-                }
-                cont = 0;
+
+            tabla.insertaTipoParam(id_pos, a.getParam());
+            for (int i = 0; i < cont; i++) {
+                tabla.insertaDespTS(i + 1, iToS(despL));
+                despL += tabla.anchoTipo(tabla.buscaTipo(tab, i + 1));
             }
+            cont = 0;
+
             c = c();
             equipara("kCerrada");
             if (!c.getTipoRet().equals(h.getTipo())) {
-                int lin = aLex.getLinea()-1;
-                System.out.println("Error en el retorno de la funcion en la linea "+lin);
+                System.out.println("Error en el retorno de la funcion de la linea " + linea);
             }
             if (c.getTipo().equals("tipo_error")) {
-                int lin = aLex.getLinea()-1;
-                System.out.println("Error en el cuerpo de la funcion en la linea " + lin);
+                System.out.println("Error en el cuerpo de la funcion de la linea " + linea);
             }
             tabla.destruyeTS();
         }
@@ -524,12 +530,11 @@ public class ASinSem {
             k = k();
             tabla.insertaTipoTS(id_pos, t.getTipo());
             cont++;
-            //tabla.insertaDespTS(id_pos, iToS(despL));
-            //despL += t.getAncho();
+            // tabla.insertaDespTS(id_pos, iToS(despL));
+            // despL += t.getAncho();
             if (k.param.equals("vacio")) {
                 a = new Atrib(k.getTipo(), t.getTipo());
-            }
-            else{
+            } else {
                 a = new Atrib(k.getTipo(), t.getTipo() + "," + k.param);
             }
         } else if (nombre().equals("pCerrado")) {
@@ -553,12 +558,11 @@ public class ASinSem {
             k1 = k();
             tabla.insertaTipoTS(id_pos, t.getTipo());
             cont++;
-            //tabla.insertaDespTS(id_pos, iToS(despL));
-            //despL += t.getAncho();
-            if (k1.param.equals("vacio")){
-                k = new Atrib (k1.getTipo(), t.getTipo());
-            }
-            else{
+            // tabla.insertaDespTS(id_pos, iToS(despL));
+            // despL += t.getAncho();
+            if (k1.param.equals("vacio")) {
+                k = new Atrib(k1.getTipo(), t.getTipo());
+            } else {
                 k = new Atrib(k1.getTipo(), t.getTipo() + "," + k1.param);
             }
         } else if (nombre().equals("pCerrado")) {
@@ -574,17 +578,19 @@ public class ASinSem {
                 || nombre().equals("cadena")) {
             Atrib r;
             Atrib e_;
+            int linea = aLex.getLinea();
             imprimir(36);
             r = r();
             e_ = e_();
-            if (r.getTipo().equals("logico") && e_.getTipo().equals("logico")){
-                e = new Atrib ("logico");
+            if (r.getTipo().equals("logico") && e_.getTipo().equals("logico")) {
+                e = new Atrib("logico");
+            } else if (e_.getTipo().equals("vacio")) {
+                e = new Atrib(r.getTipo());
+            } else {
+                e = new Atrib("tipo_error");
             }
-            else if (e_.getTipo().equals("vacio")){
-                e = new Atrib (r.getTipo());
-            }
-            else{
-                e = new Atrib ("tipo_error");
+            if (e.getTipo().equals("tipo_error")){
+                System.out.println("Error en la linea " + linea + ", la expresion no es correcta");
             }
         }
         return e;
@@ -599,15 +605,14 @@ public class ASinSem {
             equipara(nombre());
             r = r();
             e1 = e_();
-            if (r.getTipo().equals("logico") && !e1.getTipo().equals("tipo_error")){
-                e_ = new Atrib ("logico");
-            }
-            else{
-                e_ = new Atrib ("tipo_error");
+            if (r.getTipo().equals("logico") && !e1.getTipo().equals("tipo_error")) {
+                e_ = new Atrib("logico");
+            } else {
+                e_ = new Atrib("tipo_error");
             }
         } else if (nombre().equals("puntComa") || nombre().equals("pCerrado") || nombre().equals("coma")) {
             imprimir(38);
-            e_  = new Atrib ("vacio");
+            e_ = new Atrib("vacio");
         }
         return e_;
     }
@@ -621,14 +626,12 @@ public class ASinSem {
             imprimir(39);
             u = u();
             r_ = r_();
-            if (r_.getTipo().equals("logico")){
-                r = new Atrib ("logico");
-            }
-            else if (r_.getTipo().equals("vacio")){
-                r = new Atrib (u.getTipo());
-            }
-            else{
-                r = new Atrib ("tipo_error");
+            if (r_.getTipo().equals("logico")) {
+                r = new Atrib("logico");
+            } else if (r_.getTipo().equals("vacio")) {
+                r = new Atrib(u.getTipo());
+            } else {
+                r = new Atrib("tipo_error");
             }
         }
         return r;
@@ -643,11 +646,10 @@ public class ASinSem {
             equipara(nombre());
             u = u();
             r1 = r_();
-            if (!u.getTipo().equals("tipo_error") && !r1.getTipo().equals("tipo_error")){
-                r_ = new Atrib ("logico");
-            }
-            else{
-                r_ = new Atrib ("tipo_error");
+            if (!u.getTipo().equals("tipo_error") && !r1.getTipo().equals("tipo_error")) {
+                r_ = new Atrib("logico");
+            } else {
+                r_ = new Atrib("tipo_error");
             }
         } else if (nombre().equals("mayor")) {
             Atrib u;
@@ -656,16 +658,15 @@ public class ASinSem {
             equipara(nombre());
             u = u();
             r1 = r_();
-            if (!u.getTipo().equals("tipo_error") && !r1.getTipo().equals("tipo_error")){
-                r_ = new Atrib ("logico");
-            }
-            else{
-                r_ = new Atrib ("tipo_error");
+            if (!u.getTipo().equals("tipo_error") && !r1.getTipo().equals("tipo_error")) {
+                r_ = new Atrib("logico");
+            } else {
+                r_ = new Atrib("tipo_error");
             }
         } else if (nombre().equals("puntComa") || nombre().equals("pCerrado") || nombre().equals("coma")
                 || nombre().equals("and")) {
             imprimir(42);
-            r_ = new Atrib ("vacio");
+            r_ = new Atrib("vacio");
         }
         return r_;
     }
@@ -679,14 +680,12 @@ public class ASinSem {
             imprimir(43);
             v = v();
             u_ = u_();
-            if (u_.getTipo().equals("entero")){
-                u = new Atrib ("entero");
-            }
-            else if (u_.getTipo().equals("vacio")){
-                u = new Atrib (v.getTipo());
-            }
-            else{
-                u = new Atrib ("tipo_error");
+            if (u_.getTipo().equals("entero") && v.getTipo().equals("entero")) {
+                u = new Atrib("entero");
+            } else if (u_.getTipo().equals("vacio")) {
+                u = new Atrib(v.getTipo());
+            } else {
+                u = new Atrib("tipo_error");
             }
         }
         return u;
@@ -700,12 +699,12 @@ public class ASinSem {
             imprimir(44);
             equipara(nombre());
             v = v();
-            u1 = u_();
-            if (!v.getTipo().equals("tipo_error") && !u1.getTipo().equals("tipo_error")){
-                u_ = new Atrib ("entero");
-            }
-            else{
-                u_ = new Atrib ("tipo_error");
+            u1 = u_(); 
+            if (v.getTipo().equals("entero") && u1.getTipo().equals("entero") 
+                    || v.getTipo().equals("entero") && u1.getTipo().equals("vacio")) {
+                u_ = new Atrib("entero");
+            } else {
+                u_ = new Atrib("tipo_error");
             }
         } else if (nombre().equals("resta")) {
             Atrib v;
@@ -714,16 +713,16 @@ public class ASinSem {
             equipara(nombre());
             v = v();
             u1 = u_();
-            if (!v.getTipo().equals("tipo_error") && !u1.getTipo().equals("tipo_error")){
-                u_ = new Atrib ("entero");
-            }
-            else{
-                u_ = new Atrib ("tipo_error");
+            if (v.getTipo().equals("entero") && u1.getTipo().equals("entero") 
+            || v.getTipo().equals("entero") && u1.getTipo().equals("vacio")) {
+                u_ = new Atrib("entero");
+            } else {
+                u_ = new Atrib("tipo_error");
             }
         } else if (nombre().equals("puntComa") || nombre().equals("pCerrado") || nombre().equals("coma")
                 || nombre().equals("and") || nombre().equals("mayor") || nombre().equals("menor")) {
             imprimir(46);
-            u_ = new Atrib ("vacio");
+            u_ = new Atrib("vacio");
         }
         return u_;
     }
@@ -734,6 +733,7 @@ public class ASinSem {
             Atrib d;
             int id_pos;
             String tab;
+            int linea = aLex.getLinea();
             imprimir(47);
             id_pos = token.getAtributoI();
             tab = token.getTabla();
@@ -743,6 +743,7 @@ public class ASinSem {
                 if (d.getParam().equals(tabla.buscaParam(id_pos))) {
                     v = new Atrib(tabla.buscaTipoRet(id_pos), tabla.anchoTipo(tabla.buscaTipoRet(id_pos)));
                 } else {
+                    System.out.println("Error en la linea " + linea + ", los parametros de esta funcion no son correctos");
                     v = new Atrib("tipo_error", 0);
                 }
             } else if (tabla.buscaTipo(tab, id_pos) == null) {
@@ -757,23 +758,23 @@ public class ASinSem {
                 v = new Atrib("entero", 1);
             } else {
                 String tipo = tabla.buscaTipo(tab, id_pos);
-                v = new Atrib (tipo, tabla.anchoTipo(tipo));
-            } 
+                v = new Atrib(tipo, tabla.anchoTipo(tipo));
+            }
         } else if (nombre().equals("pAbierto")) {
             Atrib e;
             imprimir(48);
             equipara(nombre());
             e = e();
             equipara("pCerrado");
-            v = new Atrib (e.getTipo(), 0);
+            v = new Atrib(e.getTipo(), 0);
         } else if (nombre().equals("numEnt")) {
             imprimir(49);
             equipara(nombre());
-            v = new Atrib ("entero", 1);
+            v = new Atrib("entero", 1);
         } else if (nombre().equals("cadena")) {
             imprimir(50);
             equipara(nombre());
-            v = new Atrib ("cadena", 64);
+            v = new Atrib("cadena", 64);
         }
         return v;
     }
@@ -786,12 +787,12 @@ public class ASinSem {
             equipara(nombre());
             l = l();
             equipara("pCerrado");
-            d = new Atrib ("function", l.getTipo());
+            d = new Atrib("function", l.getTipo());
         } else if (nombre().equals("puntComa") || nombre().equals("pCerrado") || nombre().equals("coma")
                 || nombre().equals("and") || nombre().equals("mayor") || nombre().equals("menor")
                 || nombre().equals("suma") || nombre().equals("resta")) {
             imprimir(52);
-            d = new Atrib ("vacio", "vacio");
+            d = new Atrib("vacio", "vacio");
         }
         return d;
     }
