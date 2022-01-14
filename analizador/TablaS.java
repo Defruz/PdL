@@ -120,6 +120,9 @@ public class TablaS {
         return tablaGlobal.get(pos - 1).get("tipoParam");
     }
 
+    public boolean inTSL (){
+        return tablaActual != tablaGlobal;
+    }
     private void guardarTabla() {
         impreso.add((ArrayList<HashMap<String, String>>) tablaActual.clone());
     }

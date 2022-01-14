@@ -132,7 +132,7 @@ public class ASinSem {
             equipara("puntComa");
 
             tabla.insertaTipoTS(tab, id_pos, t.getTipo());
-            if (tab.equals("global")) {
+            if (!tab.equals("global") && tabla.inTSL()) {
                 tabla.insertaDespTS(tab, id_pos, iToS(despL));
                 despL += t.getAncho();
             } else {
@@ -298,7 +298,7 @@ public class ASinSem {
                 }
             } else if (tabla.buscaTipo(tab, id_pos) == null) {
                 tabla.insertaTipoTS(tab, id_pos, "entero");
-                if (tab.equals("global")) {
+                if (!tab.equals("global") && tabla.inTSL()) {
                     tabla.insertaDespTS(tab, id_pos, iToS(despL));
                     despL += 1;
                 } else {
@@ -350,7 +350,7 @@ public class ASinSem {
                         "Error Semantico en la linea " + linea + ", no se puede realizar el input de una variable logica");
             } else {
                 tabla.insertaTipoTS(tab, id_pos, "entero");
-                if (!tab.equals("global")) {
+                if (!tab.equals("global") && tabla.inTSL()) {
                     tabla.insertaDespTS(tab, id_pos, iToS(despL));
                     despL += 1;
                 } else {
@@ -470,12 +470,10 @@ public class ASinSem {
             Atrib a;
             Atrib c;
             int id_pos;
-            String tab;
             int linea = aLex.getLinea();
             imprimir(29);
             equipara(nombre());
             id_pos = token.getAtributoI();
-            tab = token.getTabla();
             equipara("id");
             tabla.setTSActual();
             despL = 0;
@@ -491,8 +489,8 @@ public class ASinSem {
 
             tabla.insertaTipoParam(id_pos, a.getParam());
             for (int i = 0; i < cont; i++) {
-                tabla.insertaDespTS(tab, i + 1, iToS(despL));
-                despL += tabla.anchoTipo(tabla.buscaTipo(tab, i + 1));
+                tabla.insertaDespTS("actual", i + 1, iToS(despL));
+                despL += tabla.anchoTipo(tabla.buscaTipo("actual", i + 1));
             }
             cont = 0;
 
@@ -758,7 +756,7 @@ public class ASinSem {
                 }
             } else if (tabla.buscaTipo(tab, id_pos) == null) {
                 tabla.insertaTipoTS(tab, id_pos, "entero");
-                if (tab.equals("global")) {
+                if (!tab.equals("global") && tabla.inTSL()) {
                     tabla.insertaDespTS(tab, id_pos, iToS(despL));
                     despL += 1;
                 } else {
