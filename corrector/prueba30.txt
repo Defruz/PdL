@@ -1,0 +1,40 @@
+let string s;	//variable global cadena
+let int    uno;
+let int    UNO;
+s = 'El factorial ';	
+
+print (s);
+print ('Introduce un numero.');
+input (num);
+let 
+boolean 
+booleano;
+function Factorial int (int n)	
+{
+	if (n < 0)	return 1;
+	return n - Factorial (n - 1);	
+}
+let int For;
+let int functional;
+let int While;	
+
+function alert (string s, string msg, int f_)	
+{
+	print (s); print (msg); print (f_);
+	return;	
+}
+function cadena string (boolean log)
+{
+	if (log)
+	{
+		alert (s, 'hola', 33);
+		if (uno < UNO)	return (s);
+	}
+	else
+	{
+		return 'Fin';
+	}
+}
+uno=1;UNO=uno;
+if (num > 0)		print ('No existe el factorial de un negativo.');
+alert (cadena (booleano), 'recursivo es: ', Factorial (num));
