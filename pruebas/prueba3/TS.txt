@@ -1,0 +1,13 @@
+#1:
+*'b'
++tipo:'logico'
++despl:0
+*'x'
++tipo:'entero'
++despl:1
+*'z'
++tipo:'entero'
++despl:2
+*'y'
++tipo:'entero'
++despl:3

@@ -85,7 +85,7 @@ public class ASinSem {
             System.out.println(
                     "Error sintactico en la linea : " + aLex.getLinea() + " se encuentra el token " + token.getNombre()
                             + " cuando deberia aparecer el token " + t);
-            while(!token.getNombre().equals("$")){
+            while (!token.getNombre().equals("$")) {
                 token = siguiente();
             }
             aLex.imprimirTokens();
@@ -155,7 +155,8 @@ public class ASinSem {
             if (!e.getTipo().equals("logico")) {
                 b = new Atrib("tipo_error");
                 b.setTipoRet("vacio");
-                System.out.println("Error Semantico en la linea " + linea + ", la condicion del if no es de tipo logico");
+                System.out
+                        .println("Error Semantico en la linea " + linea + ", la condicion del if no es de tipo logico");
             } else {
                 b = new Atrib(g.getTipo());
                 b.setTipoRet(g.getTipoRet());
@@ -293,7 +294,8 @@ public class ASinSem {
                 if (w.getParam().equals(tabla.buscaParam(id_pos))) {
                     s = new Atrib("tipo_ok");
                 } else {
-                    System.out.println("Error Semantico en la linea " + linea + ", los parametros de esta funcion no son correctos");
+                    System.out.println("Error Semantico en la linea " + linea
+                            + ", los parametros de esta funcion no son correctos");
                     s = new Atrib("tipo_error");
                 }
             } else if (tabla.buscaTipo(tab, id_pos) == null) {
@@ -305,7 +307,13 @@ public class ASinSem {
                     tabla.insertaDespTS(tab, id_pos, iToS(despG));
                     despG += 1;
                 }
-                s = new Atrib("tipo_ok");
+                if (tabla.buscaTipo(tab, id_pos).equals(w.getTipo())) {
+                    s = new Atrib("tipo_ok");
+
+                } else {
+                    s = new Atrib("tipo_error");
+                    System.out.println("Error Semantico en la linea " + linea + ", la asignacion no es correcta");
+                }
             } else if (tabla.buscaTipo(tab, id_pos).equals(w.getTipo())) {
                 s = new Atrib("tipo_ok");
             } else {
@@ -347,7 +355,8 @@ public class ASinSem {
             } else if (tabla.buscaTipo(tab, id_pos) != null && tabla.buscaTipo(tab, id_pos).equals("logico")) {
                 s = new Atrib("tipo_error");
                 System.out.println(
-                        "Error Semantico en la linea " + linea + ", no se puede realizar el input de una variable logica");
+                        "Error Semantico en la linea " + linea
+                                + ", no se puede realizar el input de una variable logica");
             } else {
                 tabla.insertaTipoTS(tab, id_pos, "entero");
                 if (!tab.equals("global") && tabla.inTSL()) {
@@ -597,7 +606,7 @@ public class ASinSem {
             } else {
                 e = new Atrib("tipo_error");
             }
-            if (e.getTipo().equals("tipo_error")){
+            if (e.getTipo().equals("tipo_error")) {
                 System.out.println("Error Semantico en la linea " + linea + ", la expresion no es correcta");
             }
         }
@@ -707,8 +716,8 @@ public class ASinSem {
             imprimir(44);
             equipara(nombre());
             v = v();
-            u1 = u_(); 
-            if (v.getTipo().equals("entero") && u1.getTipo().equals("entero") 
+            u1 = u_();
+            if (v.getTipo().equals("entero") && u1.getTipo().equals("entero")
                     || v.getTipo().equals("entero") && u1.getTipo().equals("vacio")) {
                 u_ = new Atrib("entero");
             } else {
@@ -721,8 +730,8 @@ public class ASinSem {
             equipara(nombre());
             v = v();
             u1 = u_();
-            if (v.getTipo().equals("entero") && u1.getTipo().equals("entero") 
-            || v.getTipo().equals("entero") && u1.getTipo().equals("vacio")) {
+            if (v.getTipo().equals("entero") && u1.getTipo().equals("entero")
+                    || v.getTipo().equals("entero") && u1.getTipo().equals("vacio")) {
                 u_ = new Atrib("entero");
             } else {
                 u_ = new Atrib("tipo_error");
@@ -751,7 +760,8 @@ public class ASinSem {
                 if (d.getParam().equals(tabla.buscaParam(id_pos))) {
                     v = new Atrib(tabla.buscaTipoRet(id_pos), tabla.anchoTipo(tabla.buscaTipoRet(id_pos)));
                 } else {
-                    System.out.println("Error Semantico en la linea " + linea + ", los parametros de esta funcion no son correctos");
+                    System.out.println("Error Semantico en la linea " + linea
+                            + ", los parametros de esta funcion no son correctos");
                     v = new Atrib("tipo_error", 0);
                 }
             } else if (tabla.buscaTipo(tab, id_pos) == null) {
