@@ -1,28 +1,15 @@
-let int n1;let int n2;
-let boolean l1;let boolean l2;
-let 
-	string 
-		cad
-			;
-input (n1);
-l1 = l2;
-if (l1&& l2) cad = 'hello';
-n2 -= n1 - 378;
-
-print(	33 
-		+ 
-		n1 
-		+ 
-		n2);
-
-function ff boolean(boolean ss)
+let int   a   ;
+let int    b  ;
+let int number;
+print ( 'Introduce el primer operando' );
+input (a);
+print ('Introduce el segundo operando');input(b);
+function operacion
+ int (int num1_, int num2_)
 {
-	varglobal = 8;
-	if (l1) l2 = ff (ss);
-	return ss;
+	let int number;
+	number = 8888 - num1_-num2_;
+	return number;
 }
-		
-		
-		
-if (ff(l1)) 
-    print (varglobal);
+number = 0;
+print(operacion(b,a));
